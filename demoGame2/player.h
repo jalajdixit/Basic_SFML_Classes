@@ -12,6 +12,9 @@ class Player
         sf::RectangleShape shape;
 
         float movementSpeed;
+        int hp;
+        int hpMax;
+        int points;
 
         void initVariables();
         void initShapes();
@@ -20,8 +23,11 @@ class Player
         Player(float x=0.f, float y=0.f);
         virtual ~Player();
 
+        const sf::RectangleShape getShape() const;
+
         void updateInput();
         void updateWindowBounceCollision(const sf::RenderTarget* target);
+
         void update(const sf::RenderTarget* target);
         void render(sf::RenderTarget* target);
 };

@@ -15,6 +15,8 @@ class SwagBall
         SwagBall(const sf::RenderWindow& window);
         ~SwagBall();
 
+        const sf::CircleShape getShape() const;
+
         void update();
         void render(sf::RenderTarget& target);
 };
