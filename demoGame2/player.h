@@ -21,6 +21,7 @@ class Player
         virtual ~Player();
 
         void updateInput();
-        void update(sf::RenderTarget* target);
+        void updateWindowBounceCollision(const sf::RenderTarget* target);
+        void update(const sf::RenderTarget* target);
         void render(sf::RenderTarget* target);
 };
