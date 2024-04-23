@@ -23,6 +23,11 @@ class Player
         virtual ~Player();
 
         const sf::RectangleShape getShape() const;
+        const int& getHp() const;
+        const int& getHpmax() const;
+
+        void takeDamage(const int damage);
+        void gainHealth(const int health);
 
         void updateInput();
         void updateWindowBounceCollision(const sf::RenderTarget* target);
