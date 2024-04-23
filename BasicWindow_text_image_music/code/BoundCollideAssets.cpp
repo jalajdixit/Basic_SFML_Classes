@@ -33,7 +33,7 @@ bool BoundCollide::load_text()
         return false;
     }
     txtText.setFont(txtFont);
-    txtText.setString("Bounds & Collisions");
+    txtText.setString("Basic Window");
     txtText.setPosition(sf::Vector2f(300.0f, 25.0f));
     txtText.setCharacterSize(35);
     txtText.setFillColor(sf::Color::White);

@@ -13,7 +13,7 @@ int main()
 		return -1;
 	}
 
-    sf::RenderWindow window(sf::VideoMode(1000, 600), "Bounding & Collision", sf::Style::Titlebar | sf::Style::Close);
+    sf::RenderWindow window(sf::VideoMode(1000, 600), "Basic Window", sf::Style::Titlebar | sf::Style::Close);
 
     sf::Image game_icon;
     game_icon.loadFromFile("../assets/collision.png");
