@@ -1,11 +1,8 @@
 /* Demo Game 2 */
+#pragma once
 #include <iostream>
 #include <ctime>
-
-#include <SFML/Graphics.hpp>
-#include <SFML/System.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/Audio.hpp>
+#include "player.h"
 
 class Game
 {
@@ -14,6 +11,8 @@ class Game
         sf::RenderWindow* window;
         sf::Event sfmlEvent;
         bool endGame;
+
+        Player player;
 
         void initvariables();
         void initWindow();
