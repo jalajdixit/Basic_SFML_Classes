@@ -1,8 +1,11 @@
 /* Demo Game 2 */
 #pragma once
 #include <iostream>
+#include <vector>
 #include <ctime>
+
 #include "player.h"
+#include "SwagBall.h"
 
 class Game
 {
@@ -13,6 +16,11 @@ class Game
         bool endGame;
 
         Player player;
+
+        std::vector<SwagBall> swagBalls;
+        float spawnTimerMax;
+        float spawnTimer;
+        int maxSwagBalls;
 
         void initvariables();
         void initWindow();
@@ -29,6 +37,8 @@ class Game
     //Functions
         const bool running() const;
         void pollEvents();
+
+        void spawnSwagBalls();
 
         void update();
         void render();
