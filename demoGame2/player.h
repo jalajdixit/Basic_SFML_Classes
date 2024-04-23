@@ -14,7 +14,6 @@ class Player
         float movementSpeed;
         int hp;
         int hpMax;
-        int points;
 
         void initVariables();
         void initShapes();

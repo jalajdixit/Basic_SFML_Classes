@@ -7,6 +7,7 @@ void Game::initvariables()
     this->spawnTimerMax = 10.f;
     this->spawnTimer=this->spawnTimerMax;
     this->maxSwagBalls = 10;
+    this->points = 0;
 }
 
 void Game::initWindow()
@@ -17,11 +18,28 @@ void Game::initWindow()
     this->window->setFramerateLimit(60);
 }
 
+void Game::initFont()
+{
+    if(!this->font.loadFromFile("PressStart2P-Regular.ttf")) {
+        std::cout << "ERROR::GAME::INITFONT could not load PressStart2P-Regular.ttf" << std::endl;
+    }
+}
+
+void Game::initText()
+{
+    this->guiText.setFont(this->font);
+    this->guiText.setFillColor(sf::Color::White);
+    this->guiText.setCharacterSize(20);
+    this->guiText.setPosition(10.f,10.f);
+}
+
 // Constructor & Destructor
 Game::Game()
 {
     this->initvariables();
     this->initWindow();
+    this->initFont();
+    this->initText();
 }
 
 Game::~Game()
@@ -70,8 +88,18 @@ void Game::updateCollision()
         if(this->player.getShape().getGlobalBounds().intersects(this->swagBalls[i].getShape().getGlobalBounds()))
         {
             this->swagBalls.erase(this->swagBalls.begin() + i);
+            this->points++;
         }
     }
+}
+
+void Game::updateGui()
+{
+    std::stringstream ss;
+
+    ss << "Points : " << this->points;
+
+    this->guiText.setString(ss.str());
 }
 
 void Game::update()
@@ -81,17 +109,26 @@ void Game::update()
     this->spawnSwagBalls();
     this->player.update(this->window);
     this->updateCollision();
+    this->updateGui();
+}
+
+void Game::renderGui(sf::RenderTarget* target)
+{
+    target->draw(this->guiText);
 }
 
 void Game::render()
 {
     this->window->clear();
 
+    //Render Players & Swag Balls
     this->player.render(this->window);
-
     for(auto i : this->swagBalls) {
         i.render(*this->window);
     }
+
+    //Render Gui
+    this->renderGui(this->window);
 
     this->window->display();
 }

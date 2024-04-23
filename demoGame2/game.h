@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <ctime>
+#include <sstream>
 
 #include "player.h"
 #include "SwagBall.h"
@@ -17,6 +18,11 @@ class Game
 
         Player player;
 
+        int points;
+
+        sf::Font font;
+        sf::Text guiText;
+
         std::vector<SwagBall> swagBalls;
         float spawnTimerMax;
         float spawnTimer;
@@ -24,6 +30,8 @@ class Game
 
         void initvariables();
         void initWindow();
+        void initFont();
+        void initText();
 
     public:
     // Constructor & Destructor
@@ -40,7 +48,9 @@ class Game
 
         void spawnSwagBalls();
         void updateCollision();
-
+        void updateGui();
         void update();
+
+        void renderGui(sf::RenderTarget* target);
         void render();
 };
