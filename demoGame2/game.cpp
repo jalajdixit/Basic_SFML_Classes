@@ -27,12 +27,32 @@ Game::~Game()
 
 
 //Functions
+const bool Game::running() const
+{
+    return this->window->isOpen();
+}
+
+void Game::pollEvents()
+{
+    while(this->window->pollEvent(this->sfmlEvent))
+    {
+        switch (this->sfmlEvent.type)
+        {
+            case sf::Event::Closed:
+                this->window->close();
+                break;
+        }
+    }
+}
+
 void Game::update()
 {
-
+    this->pollEvents();
 }
 
 void Game::render()
 {
-
+    this->window->clear();
+    
+    this->window->display();
 }

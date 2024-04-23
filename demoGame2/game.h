@@ -12,7 +12,7 @@ class Game
     private:
         sf::VideoMode videoMode;
         sf::RenderWindow* window;
-        
+        sf::Event sfmlEvent;
         bool endGame;
 
         void initvariables();
@@ -28,6 +28,9 @@ class Game
     //Modifiers
 
     //Functions
+        const bool running() const;
+        void pollEvents();
+
         void update();
         void render();
 };
