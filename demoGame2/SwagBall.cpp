@@ -22,9 +22,18 @@ void SwagBall::initShape(const sf::RenderWindow& window)
     }
     
     this->shape.setFillColor(color);
-    this->shape.setPosition(sf::Vector2f(
-                static_cast<float>(rand() % window.getSize().x - this->shape.getGlobalBounds().width),
-                static_cast<float>(rand() % window.getSize().y - this->shape.getGlobalBounds().height)));
+    float shapePosX = static_cast<float>(rand() % window.getSize().x - this->shape.getGlobalBounds().width);
+    float shapePosY = static_cast<float>(rand() % window.getSize().y - this->shape.getGlobalBounds().height);
+    if (shapePosX < 0.f) {
+        shapePosX = 0.f;
+    }
+    if(shapePosY < 0.f){
+        shapePosY = 0.f;
+    }
+    this->shape.setPosition(sf::Vector2f(shapePosX, shapePosY));
+    // this->shape.setPosition(sf::Vector2f(
+    //             static_cast<float>(rand() % window.getSize().x - this->shape.getGlobalBounds().width),
+    //             static_cast<float>(rand() % window.getSize().y - this->shape.getGlobalBounds().height)));
 }
 
 SwagBall::SwagBall(const sf::RenderWindow& window, int type) : type(type)
