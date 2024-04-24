@@ -18,6 +18,29 @@ void Game::initWindow()
     this->window->setFramerateLimit(60);
 }
 
+void Game::initSoundBuffer()
+{
+    if(!this->hitBuffer[SwagBallTypes::DEFAULT].loadFromFile("clickSound.mp3")) {
+        std::cout << "ERROR::GAME::INITSOUNDBUFFER could not load clickSound.mp3" << std::endl;
+    }
+    if(!this->hitBuffer[SwagBallTypes::HEALING].loadFromFile("Coin07.wav")) {
+        std::cout << "ERROR::GAME::INITSOUNDBUFFER could not load Coin07.wav" << std::endl;
+    }
+    if(!this->hitBuffer[SwagBallTypes::DAMAGING].loadFromFile("Swooosh07.wav")) {
+        std::cout << "ERROR::GAME::INITSOUNDBUFFER could not load Swooosh07.wav" << std::endl;
+    }
+}
+
+void Game::initSound()
+{
+    this->hitSound[SwagBallTypes::DEFAULT].setBuffer(this->hitBuffer[SwagBallTypes::DEFAULT]);
+    this->hitSound[SwagBallTypes::DEFAULT].setVolume(50.f);
+    this->hitSound[SwagBallTypes::HEALING].setBuffer(this->hitBuffer[SwagBallTypes::HEALING]);
+    this->hitSound[SwagBallTypes::HEALING].setVolume(50.f);
+    this->hitSound[SwagBallTypes::DAMAGING].setBuffer(this->hitBuffer[SwagBallTypes::DAMAGING]);
+    this->hitSound[SwagBallTypes::DAMAGING].setVolume(50.f);
+}
+
 void Game::initFont()
 {
     if(!this->font.loadFromFile("PressStart2P-Regular.ttf")) {
@@ -46,6 +69,8 @@ Game::Game()
     this->initWindow();
     this->initFont();
     this->initText();
+    this->initSoundBuffer();
+    this->initSound();
 }
 
 Game::~Game()
@@ -120,17 +145,19 @@ void Game::updateCollision()
             {
             case SwagBallTypes::DEFAULT:
                 this->points++;
+                this->hitSound[SwagBallTypes::DEFAULT].play();
                 break;
             case SwagBallTypes::DAMAGING:
                 this->player.takeDamage(2);
+                this->hitSound[SwagBallTypes::DAMAGING].play();
                 break;
             case SwagBallTypes::HEALING:
                 this->player.gainHealth(1);
+                this->hitSound[SwagBallTypes::HEALING].play();
                 break;
             }
             
             this->swagBalls.erase(this->swagBalls.begin() + i);
-            
         }
     }
 }

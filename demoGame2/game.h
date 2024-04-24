@@ -24,6 +24,9 @@ class Game
         sf::Text guiText;
         sf::Text endGametext;
 
+        sf::SoundBuffer hitBuffer[SwagBallTypes::NROTYPES];
+        sf::Sound hitSound[SwagBallTypes::NROTYPES];
+
         std::vector<SwagBall> swagBalls;
         float spawnTimerMax;
         float spawnTimer;
@@ -31,6 +34,8 @@ class Game
 
         void initvariables();
         void initWindow();
+        void initSoundBuffer();
+        void initSound();
         void initFont();
         void initText();
 
